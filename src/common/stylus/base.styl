@@ -1,4 +1,19 @@
+body, html
+  line-height: 1
+  font-weight: 200
+  font-family: 'font-family:"Times New Roman",Georgia,Serif;'
+
+.clearfix
+  display: inline-block
+  &.after
+    display: block
+    content: '.'
+    height: 0
+    line-height 0
+    clear: both
+    visibility: hidden
+
 .border-1px
   &::after
-    -webkit-transform :scaleY(0.7)
-    transform :scaleY(0.7)
+    -webkit-transform: scaleY(0.7)
+    transform: scaleY(0.7)
