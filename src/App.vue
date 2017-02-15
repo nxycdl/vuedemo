@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-header></v-header>
+        <v-header v-bind:seller="seller"></v-header>
         <div class="tab border-1px">
             <div class="tab-item">
                 <router-link to="/goods">商品</router-link >
@@ -15,7 +15,6 @@
         <router-view></router-view>
     </div>
 </template>
-
 <script>
     import header from './components/header/header.vue';
 
@@ -27,16 +26,10 @@
         };
       },
       created() {
-        console.log(this.seller);
         var _this = this;
-        console.log(_this.seller);
         _this.$http.get('/api/seller')
         .then(function (response) {
-          console.log('a', _this.seller);
           if (response.data.errno === ERROK) {
-            console.log('b', _this.seller);
-            console.log(response.data.data);
-            console.log('c', _this.seller);
             _this.seller = response.data.data;
           }
         })

@@ -14,7 +14,6 @@ import './common/stylus/index.styl';
 Vue.use(VueRouter);
 
 Vue.prototype.$http = axios;
-console.log('axios', axios);
 
 let routes = [
   {
