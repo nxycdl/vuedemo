@@ -38,11 +38,18 @@
     <div v-show="detailShow" class="detail" >
       <div class="detail-wrapper clearfix">
         <div class="detail-main">
-          <p>{{seller.bulletin}}{{seller.bulletin}}{{seller.bulletin}}{{seller.bulletin}}{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}{{seller.bulletin}}{{seller.bulletin}}{{seller.bulletin}}{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}{{seller.bulletin}}{{seller.bulletin}}{{seller.bulletin}}{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}{{seller.bulletin}}{{seller.bulletin}}{{seller.bulletin}}{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}{{seller.bulletin}}{{seller.bulletin}}{{seller.bulletin}}{{seller.bulletin}}</p>
+          <h1 class="name">{{seller.name}}</h1>
+          <div class="star-wrapper">
+            <star :size="48" :score="seller.score"></star>
+          </div>
+          <lines :title=seller.name></lines>
+          <ul v-if="seller.supports" class="supports">
+            <li v-for="(support,index) in seller.supports" class="support-item">
+              <span class="icon" :class="classMap[seller.supports[index].type]" ></span>
+              <span class="text" >{{seller.supports[index].description}}</span>
+            </li>
+          </ul>
+          <lines title="其他信息"></lines>
         </div>
       </div>
       <div class="detail-close" @click="hiddenDetail">
@@ -53,6 +60,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import star from 'components/star/star';
+  import lines from 'components/line/lines';
   export default {
     props: {
       seller: {
@@ -74,6 +83,10 @@
     },
     created() {
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
+    },
+    components: {
+      star: star,
+      lines: lines
     }
   };
 </script>
