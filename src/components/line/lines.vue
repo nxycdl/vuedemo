@@ -1,5 +1,5 @@
 <template>
-  <div class="title">
+  <div id="comp_lines" class="title">
     <div class="line">
     </div>
     <div class="text">{{title}}</div>
