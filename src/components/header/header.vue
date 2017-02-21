@@ -9,7 +9,7 @@
         <span class="brand">
 
         </span>
-        <span class="name">
+          <span class="name">
           {{seller.name}}
         </span>
         </div>
@@ -35,7 +35,7 @@
       <img :src="seller.avatar" width="100%" height="100%"/>
 
     </div>
-    <div v-show="detailShow" class="detail" >
+    <div v-show="detailShow" class="detail">
       <div class="detail-wrapper clearfix">
         <div class="detail-main">
           <h1 class="name">{{seller.name}}</h1>
@@ -45,8 +45,8 @@
           <lines :title=seller.name></lines>
           <ul v-if="seller.supports" class="supports">
             <li v-for="(support,index) in seller.supports" class="support-item">
-              <span class="icon" :class="classMap[seller.supports[index].type]" ></span>
-              <span class="text" >{{seller.supports[index].description}}</span>
+              <span class="icon" :class="classMap[seller.supports[index].type]"></span>
+              <span class="text">{{seller.supports[index].description}}</span>
             </li>
           </ul>
           <lines title="其他信息"></lines>

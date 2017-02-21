@@ -1,0 +1,20 @@
+<template>
+  <div class="shopcart">
+    <div class="content-left">
+      <div class="logo-wrapper">
+        <div class="logo">
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <div class="content-right"></div>
+  </div>
+</template>
+
+<script type="text/ecmascript-6">
+  export default {};
+</script>
+
+<style lang="stylus" rel="stylesheet/stylus">
+  @import "shopcart.styl"
+</style>

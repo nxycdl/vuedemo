@@ -2,7 +2,8 @@
   <div class="goods">
     <div class="menu-wrapper" ref="menuWrapper">
       <ul>
-        <li v-for="(item,index) in goods" class="menu-item" :class="{'current':currentIndex===index}" @click="selectMenu(index,$event)">
+        <li v-for="(item,index) in goods" class="menu-item" :class="{'current':currentIndex===index}"
+            @click="selectMenu(index,$event)">
           <span class="text border-1px">
             <span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>
             {{item.name}}</span>
@@ -27,7 +28,8 @@
 
                 </div>
                 <div class="price">
-                  <span class="new">¥{{food.price}}</span><span class="old"v-show="food.oldPrice"> ¥{{food.oldPrice}}</span>
+                  <span class="new">¥{{food.price}}</span><span class="old"
+                                                                v-show="food.oldPrice"> ¥{{food.oldPrice}}</span>
                 </div>
               </div>
 
@@ -36,12 +38,14 @@
         </li>
       </ul>
     </div>
+    <shopcart></shopcart>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
 
   import BScroll from 'better-scroll';
+  import shopcart from 'components/shopcart/shopcart';
   const ERROK = 0;
   export default {
     props: {
@@ -64,7 +68,7 @@
         .then(function (response) {
           if (response.data.errno === ERROK) {
             _this.goods = response.data.data;
-            _this.$nextTick(function() {
+            _this.$nextTick(function () {
               _this._initScroll();
               _this._calculateHeight();
             });
@@ -107,22 +111,27 @@
           let item = foodList[i];
           height += item.clientHeight;
           this.listHeight.push(height);
-        };
+        }
+        ;
         console.log(this.listHeight);
       },
       selectMenu(index, event) {
         // 如果不存在这个属性,则不执行下面的函数
         if (!event._constructed) {
           return;
-        };
+        }
+        ;
         let foodList = this.$refs.foodsWrapper.getElementsByClassName('food-list-hook');
         let el = foodList[index];
         this.foodsScroll.scrollToElement(el, 300);
         /*
-        let start = this.listHeight[index];
-        this.foodsScroll.scrollTo(start);
-        */
+         let start = this.listHeight[index];
+         this.foodsScroll.scrollTo(start);
+         */
       }
+    },
+    components: {
+      shopcart: shopcart
     }
   };
 </script>
