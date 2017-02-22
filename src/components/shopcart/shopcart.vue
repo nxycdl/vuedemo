@@ -1,23 +1,79 @@
 <template>
   <div class="shopcart">
     <div class="content">
-    <div class="content-left">
-      <div class="logo-wrapper">
-        <div class="logo">
-          <i class="icon-shopping_cart"></i>
+      <div class="content-left">
+        <div class="logo-wrapper">
+          <div class="logo" :class="{'highlight':totalCount>0}">
+            <i class="icon-shopping_cart" :class="{'highlight':totalCount>0}"></i>
+          </div>
+          <div class="num" v-show="totalCount>0">{{totalCount}}</div>
+        </div>
+        <div class="price" :class="{'highlight':totalPrice>0}">¥{{totalPrice}}元</div>
+        <div class="desc">另需配送费¥{{deviveryPrice}}</div>
+
+      </div>
+      <div class="content-right">
+        <div class="pay" :class="payClass">
+          {{payDesc}}
         </div>
       </div>
-      <div class="price"></div>
-      <div class="desc"></div>
-
-    </div>
-    <div class="content-right"></div>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  export default {};
+  export default {
+    props: {
+      selectFoods: {
+        type: Array,
+        default() {
+          return [{price: 10, count: 1}];
+        }
+      },
+      deviveryPrice: {
+        type: Number
+      },
+      minPrice: {
+        type: Number
+      }
+    },
+    computed: {
+      totalPrice() {
+        console.log('totalPrice');
+        let total = 0;
+        this.selectFoods.forEach((food) => {
+          total += food.price * food.count;
+        });
+        return total;
+      },
+      totalCount() {
+        let count = 0;
+        this.selectFoods.forEach((food) => {
+          count += food.count;
+        });
+        console.log('count', count);
+        return count;
+      },
+      payDesc() {
+        if (this.totalPrice === 0) {
+          return `¥${this.minPrice}元起送`;
+        } else if (this.totalPrice < this.minPrice) {
+          let diff = this.minPrice - this.totalPrice;
+          return `还差¥${diff}元起送`;
+        } else {
+          return '去结算';
+        }
+      },
+      payClass() {
+        if (this.totalPrice < this.minPrice) {
+          return 'not-enougth';
+        } else {
+          return 'enougth';
+        }
+      }
+
+    }
+  };
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

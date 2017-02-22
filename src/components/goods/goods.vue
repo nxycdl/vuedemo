@@ -31,6 +31,9 @@
                   <span class="new">¥{{food.price}}</span><span class="old"
                                                                 v-show="food.oldPrice"> ¥{{food.oldPrice}}</span>
                 </div>
+                <div class="cartcontrol-warapper">
+                  <cartcontrol :food="food"></cartcontrol>
+                </div>
               </div>
 
             </li>
@@ -38,7 +41,7 @@
         </li>
       </ul>
     </div>
-    <shopcart></shopcart>
+    <shopcart :devivery-price="seller.deliveryPrice" :min-price="seller.minPrice"></shopcart>
   </div>
 </template>
 
@@ -46,6 +49,7 @@
 
   import BScroll from 'better-scroll';
   import shopcart from 'components/shopcart/shopcart';
+  import cartcontrol from 'components/cartcontrol/cartcontrol';
   const ERROK = 0;
   export default {
     props: {
@@ -113,7 +117,6 @@
           this.listHeight.push(height);
         }
         ;
-        console.log(this.listHeight);
       },
       selectMenu(index, event) {
         // 如果不存在这个属性,则不执行下面的函数
@@ -131,7 +134,8 @@
       }
     },
     components: {
-      shopcart: shopcart
+      shopcart: shopcart,
+      cartcontrol: cartcontrol
     }
   };
 </script>
