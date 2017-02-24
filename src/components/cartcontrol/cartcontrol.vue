@@ -22,6 +22,7 @@
     },
     methods: {
       addCart(event) {
+        console.log('addCart', event._constructed);
         if (!event._constructed) {
           return;
         }
