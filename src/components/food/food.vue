@@ -1,6 +1,6 @@
 <template>
   <transition name="move">
-    <div class="food" v-show="showFlag">
+    <div class="food" v-show="showFlag" ref="food">
       <div class="food-content">
         <div class="image-header">
           <img :src="food.image" alt="">
@@ -18,6 +18,19 @@
             <span class="new">¥{{food.price}}</span><span class="old" v-show="food.oldPrice"> ¥{{food.oldPrice}}</span>
 
           </div>
+          <div class="cartcontrolwrapper">
+            <cartcontrol :food="food"></cartcontrol>
+          </div>
+          <transition name="food">
+            <div class="buy" v-show="!food.count || food.count ===0" @click.stop.prevent="addFrist($event)">
+              加入购物车
+            </div>
+          </transition>
+        </div>
+        <split></split>
+        <div class="info">
+          <div class="title" v-show="food.info">商户信息</div>
+          <p class="text" v-show="food.info">{{food.info}}</p>
         </div>
 
       </div>
@@ -26,6 +39,10 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import BScroll from 'better-scroll';
+  import cartcontrol from 'components/cartcontrol/cartcontrol';
+  import split from 'components/split/split';
+  import Vue from 'vue';
   export default {
     props: {
       food: {
@@ -41,12 +58,32 @@
       show() {
         console.log(this.food);
         this.showFlag = true;
+        this.$nextTick(() => {
+          if (!this.scroll) {
+            this.scroll = new BScroll(this.$refs.food, {
+              click: true
+            });
+          } else {
+            this.scroll.refresh();
+          }
+        });
       },
       hide() {
         this.showFlag = false;
+      },
+      addFrist(event) {
+        if (!event._constructed) {
+          return;
+        }
+        // this.$dispatch('cart.add', event.target);
+        Vue.set(this.food, 'count', 1);
       }
     },
-    computed: {}
+    computed: {},
+    components: {
+      cartcontrol,
+      split
+    }
   };
 </script>
 
