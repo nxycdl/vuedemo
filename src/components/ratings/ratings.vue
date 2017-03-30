@@ -1,5 +1,5 @@
 <template>
-<div>Iam a ratings</div>
+<div class="rat"></div>
 </template>
 
 <script type="text/ecmascript-6">
@@ -7,5 +7,5 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
-
+  @import "ratings.styl";
 </style>
