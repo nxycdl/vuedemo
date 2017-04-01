@@ -24,25 +24,45 @@
           <transition name="food">
             <div class="buy" v-show="!food.count || food.count ===0" @click.stop.prevent="addFrist($event)">
               加入购物车
+
             </div>
           </transition>
         </div>
         <split></split>
         <div class="info">
-          <div class="title" v-show="food.info">商户信息</div>
+          <div class="title" v-show="food.info">商品信息</div>
           <p class="text" v-show="food.info">{{food.info}}</p>
         </div>
         <split></split>
+        <div class="rating">
+          <h1 class="title">商品评价</h1>
+          <ratingsselect :select-type="selectType" :only-content="onlyContent" :desc="desc"
+                         :ratings="food.ratings"></ratingsselect>
+          <h1>1</h1>
+          <h1>2</h1>
+          <h1>3</h1>
+          <h1>4</h1>
+          <h1>5</h1>
+          <h1>6</h1>
+          <h1>7</h1>
+          <h1>8</h1>
+        </div>
       </div>
     </div>
   </transition>
 </template>
 
 <script type="text/ecmascript-6">
+  import Vue from 'vue';
+  import ratingsselect from 'components/ratingsselect/ratingsselect';
   import BScroll from 'better-scroll';
   import cartcontrol from 'components/cartcontrol/cartcontrol';
   import split from 'components/split/split';
-  import Vue from 'vue';
+
+  // const POISITIVE = 0;
+  // const NEGATIVE = 1;
+  const ALL = 2;
+
   export default {
     props: {
       food: {
@@ -51,13 +71,21 @@
     },
     data() {
       return {
-        showFlag: false
+        showFlag: false,
+        selectType: ALL,
+        onlyContent: false,
+        desc: {
+          all: '全部',
+          positive: '推荐',
+          negative: '吐槽'
+        }
       };
     },
     methods: {
       show() {
-        console.log(this.food);
         this.showFlag = true;
+        this.selectType = ALL;
+        this.onlyContent = false;
         this.$nextTick(() => {
           if (!this.scroll) {
             this.scroll = new BScroll(this.$refs.food, {
@@ -82,7 +110,8 @@
     computed: {},
     components: {
       cartcontrol,
-      split
+      split,
+      ratingsselect
     }
   };
 </script>
