@@ -32,7 +32,7 @@
           <div class="title" v-show="food.info">商户信息</div>
           <p class="text" v-show="food.info">{{food.info}}</p>
         </div>
-
+        <split></split>
       </div>
     </div>
   </transition>
