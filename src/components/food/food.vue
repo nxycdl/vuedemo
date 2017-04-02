@@ -25,6 +25,25 @@
             <div class="buy" v-show="!food.count || food.count ===0" @click.stop.prevent="addFrist($event)">
               加入购物车
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
           </transition>
         </div>
@@ -36,10 +55,11 @@
         <split></split>
         <div class="rating">
           <h1 class="title">商品评价</h1>
-          <ratingsselect :select-type="selectType" :only-content="onlyContent" :desc="desc"
+          <ratingsselect @select="selectRating" @toggle="toggleContent" :select-type="selectType"
+                         :only-content="onlyContent" :desc="desc"
                          :ratings="food.ratings"></ratingsselect>
           <split></split>
-          <foodratingscontent :food="food"></foodratingscontent>
+          <foodratingscontent :onlyContent="onlyContent" :selectType="selectType" :food="food"></foodratingscontent>
         </div>
       </div>
     </div>
@@ -80,7 +100,7 @@
       show() {
         this.showFlag = true;
         this.selectType = ALL;
-        this.onlyContent = false;
+        this.onlyContent = true;
         this.$nextTick(() => {
           if (!this.scroll) {
             this.scroll = new BScroll(this.$refs.food, {
@@ -100,16 +120,35 @@
         }
         // this.$dispatch('cart.add', event.target);
         Vue.set(this.food, 'count', 1);
+      },
+      selectRating(type) {
+        this.selectType = type;
+        this.$nextTick(() => {
+          this.scroll.refresh();
+        });
+      },
+      toggleContent(onlyContent) {
+        this.onlyContent = onlyContent;
+        this.$nextTick(() => {
+          this.scroll.refresh();
+        });
       }
     },
     computed: {},
+    update() {
+      console.log('update');
+    },
+    mounted() {
+      console.log('mounted');
+    },
     components: {
       cartcontrol,
       split,
       ratingsselect,
       foodratingscontent
     }
-  };
+  }
+  ;
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">
