@@ -24,26 +24,6 @@
           <transition name="food">
             <div class="buy" v-show="!food.count || food.count ===0" @click.stop.prevent="addFrist($event)">
               加入购物车
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </div>
           </transition>
         </div>
@@ -68,11 +48,11 @@
 
 <script type="text/ecmascript-6">
   import Vue from 'vue';
-  import ratingsselect from 'components/ratingsselect/ratingsselect';
   import foodratingscontent from 'components/foodratingscontent/foodratingscontent';
   import BScroll from 'better-scroll';
   import cartcontrol from 'components/cartcontrol/cartcontrol';
   import split from 'components/split/split';
+  import ratingsselect from 'components/ratingsselect/ratingsselect';
 
   // const POISITIVE = 0;
   // const NEGATIVE = 1;
